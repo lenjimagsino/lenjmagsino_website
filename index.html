@@ -946,9 +946,6 @@
         <li class="skill-item">PowerPoint</li>
         <li class="skill-item">Adobe Photoshop</li>
         <li class="skill-item">CapCut</li>
-        <li class="skill-item">Oracle VirtualBox</li>
-        <li class="skill-item">DeVASC / Ubuntu VMs</li>
-        <li class="skill-item">Cisco Packet Tracer</li>
       </ul>
     </div>
     <div class="glass skill-category reveal">
@@ -1507,6 +1504,33 @@
 
     // Projects
     document.getElementById('p1-title').textContent = document.getElementById('edit-p1-title').value;
+    document.getElementById('p1-desc').textContent = document.getElementById('edit-p1-desc').value;
+    setTags(document.getElementById('p1-tags'), document.getElementById('edit-p1-tags').value);
+
+    document.getElementById('p2-title').textContent = document.getElementById('edit-p2-title').value;
+    document.getElementById('p2-desc').textContent = document.getElementById('edit-p2-desc').value;
+    setTags(document.getElementById('p2-tags'), document.getElementById('edit-p2-tags').value);
+
+    document.getElementById('p3-title').textContent = document.getElementById('edit-p3-title').value;
+    document.getElementById('p3-desc').textContent = document.getElementById('edit-p3-desc').value;
+    setTags(document.getElementById('p3-tags'), document.getElementById('edit-p3-tags').value);
+
+    // Certs
+    [1,2,3,4,5,6,7].forEach(n => {
+      document.querySelector(`#cert-${n} .cert-title`).textContent = document.getElementById(`edit-c${n}-title`).value;
+      document.querySelector(`#cert-${n} .cert-issuer`).textContent = document.getElementById(`edit-c${n}-issuer`).value;
+      document.querySelector(`#cert-${n} .cert-date`).textContent = document.getElementById(`edit-c${n}-date`).value;
+    });
+
+    closeEditModal();
+    // Success flash
+    const fab = document.querySelector('.edit-fab');
+    fab.style.background = '#16a34a';
+    setTimeout(() => fab.style.background = '', 1500);
+  }
+</script>
+</body>
+</html>yId('p1-title').textContent = document.getElementById('edit-p1-title').value;
     document.getElementById('p1-desc').textContent = document.getElementById('edit-p1-desc').value;
     setTags(document.getElementById('p1-tags'), document.getElementById('edit-p1-tags').value);
 
