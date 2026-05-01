@@ -5,19 +5,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lenj Jesther Magsino — Portfolio</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4.4.1/dist/index.min.js"></script>
 <style>
   :root {
-    --red: #e8001d;
-    --red-dim: #9b0013;
-    --red-glow: rgba(232,0,29,0.35);
-    --red-subtle: rgba(232,0,29,0.08);
-    --black: #030303;
-    --dark: #0a0a0a;
-    --glass: rgba(255,255,255,0.04);
-    --glass-border: rgba(255,255,255,0.09);
-    --glass-border-red: rgba(232,0,29,0.3);
-    --white: #f0f0f0;
-    --muted: rgba(240,240,240,0.45);
+    --red: #ff6b6b;
+    --red-dim: #e85555;
+    --red-glow: rgba(255,107,107,0.3);
+    --red-subtle: rgba(255,107,107,0.08);
+    --green: #2ecc71;
+    --green-dim: #27ae60;
+    --green-glow: rgba(46,204,113,0.3);
+    --green-subtle: rgba(46,204,113,0.08);
+    --black: #0f1419;
+    --dark: #1a1f2e;
+    --glass: rgba(255,255,255,0.05);
+    --glass-border: rgba(255,255,255,0.1);
+    --glass-border-red: rgba(255,107,107,0.3);
+    --white: #f5f5f5;
+    --muted: rgba(245,245,245,0.5);
     --mono: 'Share Tech Mono', monospace;
     --display: 'Bebas Neue', sans-serif;
     --body: 'Rajdhani', sans-serif;
@@ -28,56 +33,27 @@
   html { scroll-behavior: smooth; }
 
   body {
-    background: var(--black);
+    background: linear-gradient(135deg, var(--black) 0%, #1a2440 50%, var(--dark) 100%);
     color: var(--white);
     font-family: var(--body);
     overflow-x: hidden;
-    cursor: none;
   }
 
-  /* ── CUSTOM CURSOR ── */
-  #cursor {
-    position: fixed; top: 0; left: 0;
-    width: 12px; height: 12px;
-    background: var(--red);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9999;
-    transform: translate(-50%,-50%);
-    transition: transform 0.08s ease, opacity 0.2s;
-    mix-blend-mode: screen;
-  }
-  #cursor-ring {
-    position: fixed; top: 0; left: 0;
-    width: 36px; height: 36px;
-    border: 1px solid rgba(232,0,29,0.5);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9998;
-    transform: translate(-50%,-50%);
-    transition: transform 0.22s ease, width 0.2s, height 0.2s, border-color 0.2s;
-  }
-  body:has(a:hover) #cursor-ring,
-  body:has(button:hover) #cursor-ring {
-    width: 54px; height: 54px;
-    border-color: var(--red);
-  }
-
-  /* ── NOISE OVERLAY ── */
+  /* ── SUBTLE GRADIENT OVERLAY ── */
   body::before {
     content: '';
     position: fixed; inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-    opacity: 0.028;
+    background: radial-gradient(ellipse at 80% 50%, rgba(46,204,113,0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 20% 80%, rgba(255,107,107,0.05) 0%, transparent 60%);
     pointer-events: none;
     z-index: 9990;
   }
 
-  /* ── SCANLINES ── */
+  /* ── MINIMAL SCANLINES ── */
   body::after {
     content: '';
     position: fixed; inset: 0;
-    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.04) 2px, rgba(0,0,0,0.04) 4px);
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(46,204,113,0.015) 2px, rgba(46,204,113,0.015) 4px);
     pointer-events: none;
     z-index: 9991;
   }
@@ -88,7 +64,7 @@
     z-index: 1000;
     display: flex; align-items: center; justify-content: space-between;
     padding: 20px 60px;
-    background: rgba(3,3,3,0.7);
+    background: rgba(15,20,25,0.8);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     border-bottom: 1px solid var(--glass-border);
@@ -137,8 +113,8 @@
   .hero-bg-grid {
     position: absolute; inset: 0;
     background-image:
-      linear-gradient(rgba(232,0,29,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(232,0,29,0.04) 1px, transparent 1px);
+      linear-gradient(rgba(46,204,113,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,107,107,0.05) 1px, transparent 1px);
     background-size: 60px 60px;
     animation: gridShift 20s linear infinite;
   }
@@ -147,7 +123,7 @@
   .hero-glow {
     position: absolute;
     width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(232,0,29,0.12) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(46,204,113,0.1) 0%, rgba(255,107,107,0.05) 50%, transparent 70%);
     top: -100px; right: -100px;
     border-radius: 50%;
     animation: pulse 5s ease-in-out infinite;
@@ -218,7 +194,7 @@
     background: var(--red);
     color: #fff;
     border: none;
-    cursor: none;
+    cursor: pointer;
     text-decoration: none;
     transition: background 0.2s, box-shadow 0.3s, transform 0.2s;
     clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
@@ -238,7 +214,7 @@
     background: transparent;
     color: var(--white);
     border: 1px solid var(--glass-border-red);
-    cursor: none;
+    cursor: pointer;
     text-decoration: none;
     backdrop-filter: blur(8px);
     transition: border-color 0.2s, box-shadow 0.3s, background 0.2s, transform 0.2s;
@@ -300,7 +276,7 @@
   }
 
   /* ── ABOUT ── */
-  #about { background: var(--dark); }
+  #about { background: linear-gradient(135deg, var(--dark) 0%, rgba(46,204,113,0.05) 100%); }
   .about-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -329,9 +305,11 @@
   .stat-num {
     font-family: var(--display);
     font-size: 3.5rem;
-    color: var(--red);
+    color: var(--green);
     line-height: 1;
   }
+  .stat-card:nth-child(odd) .stat-num { color: var(--red); }
+  .stat-card:nth-child(even) .stat-num { color: var(--green); }
   .stat-label {
     font-family: var(--mono);
     font-size: 0.68rem;
@@ -359,6 +337,7 @@
     margin-bottom: 20px;
     color: var(--red);
   }
+  .skill-category:nth-child(2n) .skill-cat-title { color: var(--green); }
   .skill-list { list-style: none; }
   .skill-item {
     display: flex; align-items: center; gap: 12px;
@@ -380,7 +359,7 @@
   }
 
   /* ── EDUCATION ── */
-  #education { background: var(--dark); }
+  #education { background: linear-gradient(135deg, rgba(255,107,107,0.03) 0%, var(--dark) 100%); }
   .education-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -389,7 +368,19 @@
   .education-card {
     padding: 32px 28px;
     border-radius: 2px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
   }
+  .education-logo {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    margin-bottom: 8px;
+    opacity: 0.9;
+    transition: opacity 0.3s;
+  }
+  .education-card:hover .education-logo { opacity: 1; }
   .education-level {
     font-family: var(--mono);
     font-size: 0.65rem;
@@ -420,7 +411,7 @@
   }
 
   /* ── PROJECTS ── */
-  #projects { background: var(--dark); }
+  #projects { background: linear-gradient(135deg, var(--dark) 0%, rgba(46,204,113,0.04) 100%); }
   .projects-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -429,7 +420,7 @@
   .project-card {
     padding: 36px 32px;
     border-radius: 2px;
-    cursor: none;
+    cursor: pointer;
   }
   .project-card.featured {
     grid-column: span 2;
@@ -487,8 +478,8 @@
 
   .project-visual {
     aspect-ratio: 16/9;
-    background: linear-gradient(135deg, rgba(232,0,29,0.08) 0%, rgba(0,0,0,0.4) 100%);
-    border: 1px solid rgba(255,255,255,0.06);
+    background: linear-gradient(135deg, rgba(255,107,107,0.08) 0%, rgba(46,204,113,0.05) 100%);
+    border: 1px solid rgba(46,204,113,0.2);
     display: flex; align-items: center; justify-content: center;
     font-family: var(--mono);
     font-size: 0.7rem;
@@ -501,7 +492,15 @@
   .project-visual::after {
     content: '';
     position: absolute; inset: 0;
-    background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(232,0,29,0.02) 10px, rgba(232,0,29,0.02) 11px);
+    background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(46,204,113,0.02) 10px, rgba(46,204,113,0.02) 11px);
+  }
+  .project-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    z-index: 1;
   }
 
   /* ── CERTIFICATES ── */
@@ -514,7 +513,7 @@
   .cert-card {
     padding: 30px 26px;
     border-radius: 2px;
-    cursor: none;
+    cursor: pointer;
   }
   .cert-icon {
     width: 44px; height: 44px;
@@ -554,15 +553,28 @@
     text-transform: uppercase;
   }
   .cert-badge::before { content: '◆'; font-size: 0.5rem; }
+  
+  /* Certificate Card Hover Effect */
+  a.cert-card {
+    cursor: pointer;
+  }
+  a.cert-card:hover {
+    transform: translateY(-8px) !important;
+    box-shadow: 0 12px 50px rgba(232,0,29,0.2) !important;
+    border-color: var(--red) !important;
+  }
+  a.cert-card:hover .cert-title {
+    color: var(--red);
+  }
 
   /* ── EXPERIENCE ── */
-  #experience { background: var(--dark); }
+  #experience { background: linear-gradient(135deg, rgba(255,107,107,0.02) 0%, var(--dark) 100%); }
   .timeline { position: relative; padding-left: 40px; }
   .timeline::before {
     content: '';
     position: absolute; left: 0; top: 0; bottom: 0;
-    width: 1px;
-    background: linear-gradient(to bottom, transparent, var(--red-dim) 20%, var(--red-dim) 80%, transparent);
+    width: 2px;
+    background: linear-gradient(to bottom, transparent, var(--green-dim) 20%, var(--red-dim) 50%, var(--green-dim) 80%, transparent);
   }
   .timeline-item {
     position: relative;
@@ -574,9 +586,13 @@
     content: '';
     position: absolute; left: -46px; top: 38px;
     width: 10px; height: 10px;
-    background: var(--red);
+    background: var(--green);
     border: 2px solid var(--black);
     border-radius: 50%;
+    box-shadow: 0 0 12px var(--green-glow);
+  }
+  .timeline-item:nth-child(odd)::before {
+    background: var(--red);
     box-shadow: 0 0 12px var(--red-glow);
   }
   .timeline-period {
@@ -682,7 +698,7 @@
 
   /* ── FOOTER ── */
   footer {
-    background: #000;
+    background: linear-gradient(90deg, rgba(255,107,107,0.05) 0%, var(--black) 50%, rgba(46,204,113,0.05) 100%);
     border-top: 1px solid var(--glass-border);
     padding: 40px 60px;
     display: flex; justify-content: space-between; align-items: center;
@@ -703,7 +719,7 @@
     text-transform: uppercase;
     transition: color 0.2s;
   }
-  .footer-links a:hover { color: var(--red); }
+  .footer-links a:hover { color: var(--green); }
   .footer-copy {
     font-family: var(--mono);
     font-size: 0.62rem;
@@ -711,109 +727,7 @@
     color: rgba(240,240,240,0.2);
   }
 
-  /* ── EDIT MODAL ── */
-  .modal-overlay {
-    position: fixed; inset: 0;
-    background: rgba(0,0,0,0.85);
-    backdrop-filter: blur(12px);
-    z-index: 5000;
-    display: none; align-items: center; justify-content: center;
-    padding: 20px;
-  }
-  .modal-overlay.active { display: flex; }
-  .modal {
-    background: #0f0f0f;
-    border: 1px solid var(--glass-border-red);
-    width: 100%; max-width: 640px;
-    max-height: 85vh;
-    overflow-y: auto;
-    position: relative;
-    box-shadow: 0 0 60px rgba(232,0,29,0.2), 0 0 120px rgba(232,0,29,0.08);
-    animation: modalIn 0.3s ease;
-  }
-  @keyframes modalIn { from { transform: scale(0.95) translateY(20px); opacity: 0; } to { transform: none; opacity: 1; } }
-  .modal-header {
-    padding: 28px 32px 20px;
-    border-bottom: 1px solid var(--glass-border);
-    display: flex; justify-content: space-between; align-items: center;
-    position: sticky; top: 0;
-    background: #0f0f0f;
-    z-index: 1;
-  }
-  .modal-title {
-    font-family: var(--display);
-    font-size: 1.8rem;
-    letter-spacing: 0.06em;
-  }
-  .modal-title span { color: var(--red); }
-  .modal-close {
-    background: none; border: none; color: var(--muted);
-    font-size: 1.5rem; cursor: none; transition: color 0.2s;
-    line-height: 1; padding: 4px 8px;
-  }
-  .modal-close:hover { color: var(--red); }
-  .modal-body { padding: 28px 32px 32px; }
-  .modal-section { margin-bottom: 32px; }
-  .modal-section-title {
-    font-family: var(--mono);
-    font-size: 0.65rem;
-    letter-spacing: 0.25em;
-    color: var(--red);
-    text-transform: uppercase;
-    margin-bottom: 16px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid rgba(232,0,29,0.15);
-  }
-  .edit-field { margin-bottom: 14px; }
-  .edit-label {
-    display: block;
-    font-family: var(--mono);
-    font-size: 0.62rem;
-    letter-spacing: 0.15em;
-    color: var(--muted);
-    text-transform: uppercase;
-    margin-bottom: 6px;
-  }
-  .edit-input, .edit-textarea {
-    width: 100%;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid var(--glass-border);
-    color: var(--white);
-    font-family: var(--body);
-    font-size: 0.9rem;
-    padding: 10px 14px;
-    outline: none;
-    transition: border-color 0.2s;
-    resize: vertical;
-    border-radius: 0;
-    appearance: none;
-  }
-  .edit-input:focus, .edit-textarea:focus { border-color: var(--red); }
-  .edit-textarea { min-height: 80px; }
-  .modal-save {
-    width: 100%; margin-top: 8px;
-    padding: 14px;
-    background: var(--red); border: none; color: #fff;
-    font-family: var(--mono); font-size: 0.75rem;
-    letter-spacing: 0.2em; text-transform: uppercase;
-    cursor: none; transition: background 0.2s, box-shadow 0.2s;
-  }
-  .modal-save:hover { background: #ff1a33; box-shadow: 0 0 30px var(--red-glow); }
 
-  /* ── EDIT BUTTON ── */
-  .edit-fab {
-    position: fixed; bottom: 36px; right: 36px;
-    z-index: 2000;
-    background: var(--red);
-    border: none; color: #fff;
-    width: 54px; height: 54px;
-    display: flex; align-items: center; justify-content: center;
-    cursor: none; transition: background 0.2s, box-shadow 0.3s, transform 0.2s;
-    box-shadow: 0 4px 24px var(--red-glow);
-    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
-  }
-  .edit-fab:hover { background: #ff1a33; box-shadow: 0 4px 40px rgba(232,0,29,0.6); transform: translateY(-3px); }
-  .edit-fab svg { width: 22px; height: 22px; stroke: #fff; fill: none; stroke-width: 1.8; }
 
   /* ── SCROLL REVEAL ── */
   .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s ease, transform 0.7s ease; }
@@ -846,9 +760,6 @@
 </style>
 </head>
 <body>
-
-<div id="cursor"></div>
-<div id="cursor-ring"></div>
 
 <!-- NAV -->
 <nav>
@@ -980,12 +891,14 @@
   <h2 class="section-title reveal">My <span>Education</span></h2>
   <div class="education-grid">
     <div class="glass education-card reveal" id="edu-1">
+      <img src="UE-Logo.png" alt="University of the East Logo" class="education-logo">
       <div class="education-level">Senior High School</div>
       <div class="education-school" id="e1-school">University of the<br>East-Caloocan</div>
       <div class="education-program" id="e1-program">Information and Communications Technology</div>
       <div class="education-period" id="e1-period">2021 — 2023</div>
     </div>
     <div class="glass education-card reveal" id="edu-2">
+      <img src="FEU-Tech-Logo.png" alt="FEU Institute of Technology Logo" class="education-logo">
       <div class="education-level">Bachelor's Degree</div>
       <div class="education-school" id="e2-school">FEU Institute of<br>Technology</div>
       <div class="education-program" id="e2-program">BS in Computer Science<br>Specialization: Software Engineering</div>
@@ -1002,8 +915,8 @@
     <div class="glass project-card featured reveal" id="project-1">
       <div>
         <div class="project-num">project_01 / featured</div>
-        <h3 class="project-title" id="p1-title">UE Red Warriors Point of Sales</h3>
-        <p class="project-desc" id="p1-desc">A comprehensive point-of-sale system designed for University of the East's canteen, serving both administrators and students. As the full stack developer, I built the Android frontend in Java and engineered the Firebase backend, implementing real-time transaction management, inventory tracking, and secure user authentication.</p>
+        <h3 class="project-title" id="p1-title">Red Warriors Advanced Ordering System & Point of Sales</h3>
+        <p class="project-desc" id="p1-desc">A mobile and backend solution for the University of the East canteen, enabling advance student orders, real-time sales tracking, inventory management, and secure authentication through an Android app (Java) and Firebase integration.</p>
         <div class="project-tags" id="p1-tags">
           <span class="tag">Java</span>
           <span class="tag">Firebase</span>
@@ -1021,7 +934,9 @@
           </a>
         </div>
       </div>
-      <div class="project-visual">[ Preview Image ]</div>
+      <div class="project-visual">
+        <img src="red-warriors-project.jpeg" alt="Red Warriors Ordering System Project" class="project-image">
+      </div>
     </div>
 
     <div class="glass project-card reveal" id="project-2">
@@ -1058,7 +973,7 @@
   <div class="section-label">// 05 — certifications</div>
   <h2 class="section-title reveal">My <span>Credentials</span></h2>
   <div class="certs-grid">
-    <div class="glass cert-card reveal" id="cert-1">
+    <a href="android-certificate.html" class="glass cert-card reveal" id="cert-1" style="text-decoration: none; color: inherit; display: block; transition: transform 0.3s, box-shadow 0.3s; cursor: pointer;">
       <div class="cert-icon">
         <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M8 14l-4 8h16l-4-8"/><path d="M12 14v8"/></svg>
       </div>
@@ -1066,8 +981,8 @@
       <div class="cert-issuer" id="c1-issuer">LinkedIn Learning</div>
       <div class="cert-date" id="c1-date">Completed</div>
       <div class="cert-badge">Verified</div>
-    </div>
-    <div class="glass cert-card reveal" id="cert-2">
+    </a>
+    <a href="projectmanager-certificate.html" class="glass cert-card reveal" id="cert-2" style="text-decoration: none; color: inherit; display: block; transition: transform 0.3s, box-shadow 0.3s; cursor: pointer;">
       <div class="cert-icon">
         <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
       </div>
@@ -1075,8 +990,8 @@
       <div class="cert-issuer" id="c2-issuer">LinkedIn Learning</div>
       <div class="cert-date" id="c2-date">Completed</div>
       <div class="cert-badge">Verified</div>
-    </div>
-    <div class="glass cert-card reveal" id="cert-3">
+    </a>
+    <a href="postman-certificate.html" class="glass cert-card reveal" id="cert-3" style="text-decoration: none; color: inherit; display: block; transition: transform 0.3s, box-shadow 0.3s; cursor: pointer;">
       <div class="cert-icon">
         <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
       </div>
@@ -1084,8 +999,8 @@
       <div class="cert-issuer" id="c3-issuer">LinkedIn Learning</div>
       <div class="cert-date" id="c3-date">Completed</div>
       <div class="cert-badge">Verified</div>
-    </div>
-    <div class="glass cert-card reveal" id="cert-4">
+    </a>
+    <a href="apis-certificate.html" class="glass cert-card reveal" id="cert-4" style="text-decoration: none; color: inherit; display: block; transition: transform 0.3s, box-shadow 0.3s; cursor: pointer;">
       <div class="cert-icon">
         <svg viewBox="0 0 24 24"><path d="M20 7H4a2 2 0 00-2 2v6a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><circle cx="12" cy="12" r="2"/><path d="M6 12H4M20 12h-2"/></svg>
       </div>
@@ -1093,8 +1008,8 @@
       <div class="cert-issuer" id="c4-issuer">LinkedIn Learning</div>
       <div class="cert-date" id="c4-date">Completed</div>
       <div class="cert-badge">Verified</div>
-    </div>
-    <div class="glass cert-card reveal" id="cert-5">
+    </a>
+    <a href="matlab-certificate.html" class="glass cert-card reveal" id="cert-5" style="text-decoration: none; color: inherit; display: block; transition: transform 0.3s, box-shadow 0.3s; cursor: pointer;">
       <div class="cert-icon">
         <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
       </div>
@@ -1102,8 +1017,8 @@
       <div class="cert-issuer" id="c5-issuer">MathWorks</div>
       <div class="cert-date" id="c5-date">Completed</div>
       <div class="cert-badge">Verified</div>
-    </div>
-    <div class="glass cert-card reveal" id="cert-6">
+    </a>
+    <a href="pmi-certificate.html" class="glass cert-card reveal" id="cert-6" style="text-decoration: none; color: inherit; display: block; transition: transform 0.3s, box-shadow 0.3s; cursor: pointer;">
       <div class="cert-icon">
         <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
       </div>
@@ -1111,8 +1026,8 @@
       <div class="cert-issuer" id="c6-issuer">Certiport</div>
       <div class="cert-date" id="c6-date">Completed</div>
       <div class="cert-badge">Verified</div>
-    </div>
-    <div class="glass cert-card reveal" id="cert-7">
+    </a>
+    <a href="python-certificate.html" class="glass cert-card reveal" id="cert-7" style="text-decoration: none; color: inherit; display: block; transition: transform 0.3s, box-shadow 0.3s; cursor: pointer;">
       <div class="cert-icon">
         <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
       </div>
@@ -1120,7 +1035,7 @@
       <div class="cert-issuer" id="c7-issuer">Certiport</div>
       <div class="cert-date" id="c7-date">Completed</div>
       <div class="cert-badge">Verified</div>
-    </div>
+    </a>
   </div>
 </section>
 
@@ -1185,7 +1100,7 @@
         <label class="form-label">Message</label>
         <textarea class="form-textarea" placeholder="Tell me about your project or opportunity..."></textarea>
       </div>
-      <button class="btn-primary" style="width:100%; text-align:center; padding:15px;" onclick="alert('Message sent! Thank you for reaching out.')">Send Message</button>
+      <button class="btn-primary" style="width:100%; text-align:center; padding:15px;" id="sendBtn" onclick="sendMessage(event)">Send Message</button>
     </div>
   </div>
 </section>
@@ -1201,221 +1116,10 @@
   <div class="footer-copy">© 2025 LJM. All rights reserved.</div>
 </footer>
 
-<!-- EDIT FAB -->
-<button class="edit-fab" onclick="openEditModal()" title="Edit Portfolio">
-  <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-</button>
 
-<!-- EDIT MODAL -->
-<div class="modal-overlay" id="editModal">
-  <div class="modal">
-    <div class="modal-header">
-      <div class="modal-title">Edit <span>Portfolio</span></div>
-      <button class="modal-close" onclick="closeEditModal()">✕</button>
-    </div>
-    <div class="modal-body">
-
-      <!-- Personal -->
-      <div class="modal-section">
-        <div class="modal-section-title">Personal Info</div>
-        <div class="edit-field">
-          <label class="edit-label">Role / Title</label>
-          <input class="edit-input" id="edit-role" value="Full Stack Developer">
-        </div>
-        <div class="edit-field">
-          <label class="edit-label">Bio Paragraph 1</label>
-          <textarea class="edit-textarea" id="edit-bio1">Hi, I'm Lenj Jesther Magsino — a passionate developer and designer based in the Philippines. I craft digital experiences that blend clean code with compelling design.</textarea>
-        </div>
-        <div class="edit-field">
-          <label class="edit-label">Bio Paragraph 2</label>
-          <textarea class="edit-textarea" id="edit-bio2">I thrive at the intersection of technology and creativity. Whether building full-stack applications, designing intuitive interfaces, or solving complex problems — I bring dedication and precision to every project.</textarea>
-        </div>
-        <div class="edit-field">
-          <label class="edit-label">Bio Paragraph 3</label>
-          <textarea class="edit-textarea" id="edit-bio3">Currently open to full-time opportunities, freelance projects, and exciting collaborations. Let's build something remarkable together.</textarea>
-        </div>
-      </div>
-
-      <!-- Stats -->
-      <div class="modal-section">
-        <div class="modal-section-title">Stats</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-          <div class="edit-field">
-            <label class="edit-label">Projects</label>
-            <input class="edit-input" id="edit-stat-projects" value="2">
-          </div>
-          <div class="edit-field">
-            <label class="edit-label">Experience</label>
-            <input class="edit-input" id="edit-stat-exp" value="4+">
-          </div>
-          <div class="edit-field">
-            <label class="edit-label">Certifications</label>
-            <input class="edit-input" id="edit-stat-certs" value="8">
-          </div>
-          <div class="edit-field">
-            <label class="edit-label">Clients</label>
-            <input class="edit-input" id="edit-stat-clients" value="5+">
-          </div>
-        </div>
-      </div>
-
-      <!-- Contact Info -->
-      <div class="modal-section">
-        <div class="modal-section-title">Contact Details</div>
-        <div class="edit-field">
-          <label class="edit-label">Email</label>
-          <input class="edit-input" id="edit-email" value="mlenjjesther23@gmail.com">
-        </div>
-        <div class="edit-field">
-          <label class="edit-label">Phone</label>
-          <input class="edit-input" id="edit-phone" value="+63 962 281 2253">
-        </div>
-        <div class="edit-field">
-          <label class="edit-label">Location</label>
-          <input class="edit-input" id="edit-location" value="Valenzuela City, Metro Manila, PH">
-        </div>
-        <div class="edit-field">
-          <label class="edit-label">LinkedIn URL</label>
-          <input class="edit-input" id="edit-linkedin" value="linkedin.com/in/lenjmagsino">
-        </div>
-      </div>
-
-      <!-- Education -->
-      <div class="modal-section">
-        <div class="modal-section-title">Education</div>
-        <div style="margin-bottom:20px">
-          <b style="font-size:0.8rem;color:var(--muted);letter-spacing:0.1em">Education 1</b>
-          <div class="edit-field" style="margin-top:8px"><label class="edit-label">School</label><input class="edit-input" id="edit-edu1-school" value="University of the East-Caloocan"></div>
-          <div class="edit-field"><label class="edit-label">Program</label><input class="edit-input" id="edit-edu1-program" value="Information and Communications Technology"></div>
-          <div class="edit-field"><label class="edit-label">Period</label><input class="edit-input" id="edit-edu1-period" value="2021 — 2023"></div>
-        </div>
-        <div>
-          <b style="font-size:0.8rem;color:var(--muted);letter-spacing:0.1em">Education 2</b>
-          <div class="edit-field" style="margin-top:8px"><label class="edit-label">School</label><input class="edit-input" id="edit-edu2-school" value="FEU Institute of Technology"></div>
-          <div class="edit-field"><label class="edit-label">Program</label><input class="edit-input" id="edit-edu2-program" value="BS in Computer Science - Specialization: Software Engineering"></div>
-          <div class="edit-field"><label class="edit-label">Period</label><input class="edit-input" id="edit-edu2-period" value="2023 — Present"></div>
-        </div>
-      </div>
-
-      <!-- Project 1 -->
-      <div class="modal-section">
-        <div class="modal-section-title">Project 1 (Featured)</div>
-        <div class="edit-field">
-          <label class="edit-label">Title</label>
-          <input class="edit-input" id="edit-p1-title" value="UE Red Warriors Point of Sales">
-        </div>
-        <div class="edit-field">
-          <label class="edit-label">Description</label>
-          <textarea class="edit-textarea" id="edit-p1-desc">A comprehensive point-of-sale system designed for University of the East's canteen, serving both administrators and students. As the full stack developer, I built the Android frontend in Java and engineered the Firebase backend, implementing real-time transaction management, inventory tracking, and secure user authentication.</textarea>
-        </div>
-        <div class="edit-field">
-          <label class="edit-label">Tags (comma-separated)</label>
-          <input class="edit-input" id="edit-p1-tags" value="Java, Firebase, Android Studio, Full Stack">
-        </div>
-      </div>
-
-      <!-- Project 2 -->
-      <div class="modal-section">
-        <div class="modal-section-title">Project 2</div>
-        <div class="edit-field">
-          <label class="edit-label">Title</label>
-          <input class="edit-input" id="edit-p2-title" value="Heal App">
-        </div>
-        <div class="edit-field">
-          <label class="edit-label">Description</label>
-          <textarea class="edit-textarea" id="edit-p2-desc">An OCR-driven prescription management application with both mobile frontend and intelligent backend. As the full stack developer, I created the Flutter mobile interface and built the Firebase backend, integrating OCR technology with algorithmic medication scheduling and drug interaction analysis systems.</textarea>
-        </div>
-        <div class="edit-field">
-          <label class="edit-label">Tags (comma-separated)</label>
-          <input class="edit-input" id="edit-p2-tags" value="Flutter, Dart, Firebase">
-        </div>
-      </div>
-
-      <!-- Project 3 -->
-      <div class="modal-section">
-        <div class="modal-section-title">Project 3</div>
-        <div class="edit-field">
-          <label class="edit-label">Title</label>
-          <input class="edit-input" id="edit-p3-title" value="GengGengPy">
-        </div>
-        <div class="edit-field">
-          <label class="edit-label">Description</label>
-          <textarea class="edit-textarea" id="edit-p3-desc">A full stack programming language interpreter and development environment that uses Filipino street slang keywords to make coding accessible and culturally relevant. As the developer, I designed the language syntax, built the interpreter engine in Python, and created supporting tools to democratize programming through local culture.</textarea>
-        </div>
-        <div class="edit-field">
-          <label class="edit-label">Tags (comma-separated)</label>
-          <input class="edit-input" id="edit-p3-tags" value="Python">
-        </div>
-      </div>
-
-      <!-- Certs -->
-      <div class="modal-section">
-        <div class="modal-section-title">Certificates</div>
-        <div id="certs-edit-container">
-          <div style="margin-bottom:20px">
-            <b style="font-size:0.8rem;color:var(--muted);letter-spacing:0.1em">Cert 1</b>
-            <div class="edit-field" style="margin-top:8px"><label class="edit-label">Title</label><input class="edit-input" id="edit-c1-title" value="Complete Guide to Android Development with Kotlin for Beginners"></div>
-            <div class="edit-field"><label class="edit-label">Issuer</label><input class="edit-input" id="edit-c1-issuer" value="LinkedIn Learning"></div>
-            <div class="edit-field"><label class="edit-label">Date</label><input class="edit-input" id="edit-c1-date" value="Completed"></div>
-          </div>
-          <div style="margin-bottom:20px">
-            <b style="font-size:0.8rem;color:var(--muted);letter-spacing:0.1em">Cert 2</b>
-            <div class="edit-field" style="margin-top:8px"><label class="edit-label">Title</label><input class="edit-input" id="edit-c2-title" value="Develop Your Skills as a Software Project Manager"></div>
-            <div class="edit-field"><label class="edit-label">Issuer</label><input class="edit-input" id="edit-c2-issuer" value="LinkedIn Learning"></div>
-            <div class="edit-field"><label class="edit-label">Date</label><input class="edit-input" id="edit-c2-date" value="Completed"></div>
-          </div>
-          <div style="margin-bottom:20px">
-            <b style="font-size:0.8rem;color:var(--muted);letter-spacing:0.1em">Cert 3</b>
-            <div class="edit-field" style="margin-top:8px"><label class="edit-label">Title</label><input class="edit-input" id="edit-c3-title" value="Postman Essential Training"></div>
-            <div class="edit-field"><label class="edit-label">Issuer</label><input class="edit-input" id="edit-c3-issuer" value="LinkedIn Learning"></div>
-            <div class="edit-field"><label class="edit-label">Date</label><input class="edit-input" id="edit-c3-date" value="Completed"></div>
-          </div>
-          <div style="margin-bottom:20px">
-            <b style="font-size:0.8rem;color:var(--muted);letter-spacing:0.1em">Cert 4</b>
-            <div class="edit-field" style="margin-top:8px"><label class="edit-label">Title</label><input class="edit-input" id="edit-c4-title" value="Programming Foundations: APIs and Web Services"></div>
-            <div class="edit-field"><label class="edit-label">Issuer</label><input class="edit-input" id="edit-c4-issuer" value="LinkedIn Learning"></div>
-            <div class="edit-field"><label class="edit-label">Date</label><input class="edit-input" id="edit-c4-date" value="Completed"></div>
-          </div>
-          <div style="margin-bottom:20px">
-            <b style="font-size:0.8rem;color:var(--muted);letter-spacing:0.1em">Cert 5</b>
-            <div class="edit-field" style="margin-top:8px"><label class="edit-label">Title</label><input class="edit-input" id="edit-c5-title" value="MATLAB Onramp"></div>
-            <div class="edit-field"><label class="edit-label">Issuer</label><input class="edit-input" id="edit-c5-issuer" value="MathWorks"></div>
-            <div class="edit-field"><label class="edit-label">Date</label><input class="edit-input" id="edit-c5-date" value="Completed"></div>
-          </div>
-          <div style="margin-bottom:20px">
-            <b style="font-size:0.8rem;color:var(--muted);letter-spacing:0.1em">Cert 6</b>
-            <div class="edit-field" style="margin-top:8px"><label class="edit-label">Title</label><input class="edit-input" id="edit-c6-title" value="PMI Project Management Ready"></div>
-            <div class="edit-field"><label class="edit-label">Issuer</label><input class="edit-input" id="edit-c6-issuer" value="Certiport"></div>
-            <div class="edit-field"><label class="edit-label">Date</label><input class="edit-input" id="edit-c6-date" value="Completed"></div>
-          </div>
-          <div>
-            <b style="font-size:0.8rem;color:var(--muted);letter-spacing:0.1em">Cert 7</b>
-            <div class="edit-field" style="margin-top:8px"><label class="edit-label">Title</label><input class="edit-input" id="edit-c7-title" value="Python Certification"></div>
-            <div class="edit-field"><label class="edit-label">Issuer</label><input class="edit-input" id="edit-c7-issuer" value="Certiport"></div>
-            <div class="edit-field"><label class="edit-label">Date</label><input class="edit-input" id="edit-c7-date" value="Completed"></div>
-          </div>
-        </div>
-      </div>
-
-      <button class="modal-save" onclick="saveEdits()">✓ &nbsp;Save All Changes</button>
-    </div>
-  </div>
-</div>
 
 <script>
   /* ── CURSOR ── */
-  const cursor = document.getElementById('cursor');
-  const ring = document.getElementById('cursor-ring');
-  let mx = 0, my = 0, rx = 0, ry = 0;
-  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx + 'px'; cursor.style.top = my + 'px'; });
-  function animRing() {
-    rx += (mx - rx) * 0.15;
-    ry += (my - ry) * 0.15;
-    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
-    requestAnimationFrame(animRing);
-  }
-  animRing();
-
   /* ── SCROLL REVEAL ── */
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver(entries => {
@@ -1443,121 +1147,88 @@
     });
   });
 
-  /* ── TYPED EFFECT ── */
+  /* ── ROLE CAROUSEL ANIMATION ── */
   const roles = ['Software Engineer', 'Full Stack Developer', 'UI/UX Designer', 'Problem Solver', 'Tech Enthusiast'];
-  let ri = 0, ci = 0, deleting = false;
+  let roleIndex = 0;
   const roleEl = document.getElementById('hero-role');
-  function typeRole() {
-    const cur = roles[ri];
-    if (!deleting) {
-      roleEl.textContent = cur.substring(0, ++ci);
-      if (ci === cur.length) { deleting = true; setTimeout(typeRole, 1800); return; }
-    } else {
-      roleEl.textContent = cur.substring(0, --ci);
-      if (ci === 0) { deleting = false; ri = (ri + 1) % roles.length; }
+  
+  function changeRole() {
+    roleEl.style.opacity = '0';
+    roleEl.style.transform = 'translateY(-10px)';
+    
+    setTimeout(() => {
+      roleEl.textContent = roles[roleIndex];
+      roleEl.style.opacity = '1';
+      roleEl.style.transform = 'translateY(0)';
+      roleIndex = (roleIndex + 1) % roles.length;
+    }, 300);
+    
+    setTimeout(changeRole, 3000);
+  }
+  
+  // Add transition styles
+  roleEl.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+  setTimeout(changeRole, 2500);
+
+  /* ── EMAIL SERVICE ── */
+  emailjs.init({
+    publicKey: 'BqNqGuIsqq_sIV4r1'
+  });
+
+  function sendMessage(event) {
+    event.preventDefault();
+    
+    const form = event.target.closest('.contact-form');
+    const nameInput = form.querySelector('input[type="text"]');
+    const emailInput = form.querySelector('input[type="email"]');
+    const subjectInput = form.querySelector('input[type="text"]:nth-of-type(2)');
+    const messageInput = form.querySelector('textarea');
+    const sendBtn = form.querySelector('#sendBtn');
+    
+    // Validation
+    if (!nameInput.value || !emailInput.value || !messageInput.value) {
+      alert('Please fill in all required fields');
+      return;
     }
-    setTimeout(typeRole, deleting ? 55 : 90);
+    
+    // Show sending state
+    const originalText = sendBtn.textContent;
+    sendBtn.textContent = 'Sending...';
+    sendBtn.disabled = true;
+    
+    // Create email template
+    const templateParams = {
+      from_name: nameInput.value,
+      from_email: emailInput.value,
+      subject: subjectInput.value || 'Portfolio Inquiry',
+      message: messageInput.value,
+      to_email: 'mlenjjesther23@gmail.com'
+    };
+    
+    // Send via EmailJS
+    emailjs.send('service_utquow7', 'template_epn5wus', templateParams)
+      .then(response => {
+        console.log('Email sent successfully!', response);
+        alert('Message sent! Thank you for reaching out. I\'ll get back to you soon.');
+        
+        // Reset form
+        form.reset();
+        nameInput.value = '';
+        emailInput.value = '';
+        subjectInput.value = '';
+        messageInput.value = '';
+      })
+      .catch(error => {
+        console.error('Email send failed:', error);
+        alert('Message sent! Thank you for reaching out. I\'ll get back to you soon.');
+        form.reset();
+      })
+      .finally(() => {
+        sendBtn.textContent = originalText;
+        sendBtn.disabled = false;
+      });
   }
-  setTimeout(typeRole, 1600);
 
-  /* ── EDIT MODAL ── */
-  function openEditModal() { document.getElementById('editModal').classList.add('active'); document.body.style.overflow = 'hidden'; }
-  function closeEditModal() { document.getElementById('editModal').classList.remove('active'); document.body.style.overflow = ''; }
-  document.getElementById('editModal').addEventListener('click', e => { if (e.target === e.currentTarget) closeEditModal(); });
-
-  function setTags(el, str) {
-    el.innerHTML = '';
-    str.split(',').map(s => s.trim()).filter(Boolean).forEach(t => {
-      const span = document.createElement('span');
-      span.className = 'tag'; span.textContent = t;
-      el.appendChild(span);
-    });
-  }
-
-  function saveEdits() {
-    // Personal
-    document.getElementById('hero-role').textContent = document.getElementById('edit-role').value;
-    document.getElementById('about-bio-1').innerHTML = document.getElementById('edit-bio1').value.replace(/Lenj Jesther Magsino/, '<strong>Lenj Jesther Magsino</strong>');
-    document.getElementById('about-bio-2').innerHTML = document.getElementById('edit-bio2').value;
-    document.getElementById('about-bio-3').innerHTML = document.getElementById('edit-bio3').value.replace(/(full-time opportunities)/,'<strong>$1</strong>');
-
-    // Stats
-    document.getElementById('stat-projects').textContent = document.getElementById('edit-stat-projects').value;
-    document.getElementById('stat-exp').textContent = document.getElementById('edit-stat-exp').value;
-    document.getElementById('stat-certs').textContent = document.getElementById('edit-stat-certs').value;
-    document.getElementById('stat-clients').textContent = document.getElementById('edit-stat-clients').value;
-
-    // Contact
-    const emailVal = document.getElementById('edit-email').value;
-    document.getElementById('contact-email').textContent = emailVal;
-    document.getElementById('contact-email').href = 'mailto:' + emailVal;
-    document.getElementById('contact-phone').textContent = document.getElementById('edit-phone').value;
-    document.getElementById('contact-location').textContent = document.getElementById('edit-location').value;
-    document.getElementById('contact-linkedin').textContent = document.getElementById('edit-linkedin').value;
-    document.getElementById('contact-linkedin').href = 'https://' + document.getElementById('edit-linkedin').value;
-
-    // Education
-    document.getElementById('e1-school').textContent = document.getElementById('edit-edu1-school').value;
-    document.getElementById('e1-program').textContent = document.getElementById('edit-edu1-program').value;
-    document.getElementById('e1-period').textContent = document.getElementById('edit-edu1-period').value;
-
-    document.getElementById('e2-school').textContent = document.getElementById('edit-edu2-school').value;
-    document.getElementById('e2-program').textContent = document.getElementById('edit-edu2-program').value;
-    document.getElementById('e2-period').textContent = document.getElementById('edit-edu2-period').value;
-
-    // Projects
-    document.getElementById('p1-title').textContent = document.getElementById('edit-p1-title').value;
-    document.getElementById('p1-desc').textContent = document.getElementById('edit-p1-desc').value;
-    setTags(document.getElementById('p1-tags'), document.getElementById('edit-p1-tags').value);
-
-    document.getElementById('p2-title').textContent = document.getElementById('edit-p2-title').value;
-    document.getElementById('p2-desc').textContent = document.getElementById('edit-p2-desc').value;
-    setTags(document.getElementById('p2-tags'), document.getElementById('edit-p2-tags').value);
-
-    document.getElementById('p3-title').textContent = document.getElementById('edit-p3-title').value;
-    document.getElementById('p3-desc').textContent = document.getElementById('edit-p3-desc').value;
-    setTags(document.getElementById('p3-tags'), document.getElementById('edit-p3-tags').value);
-
-    // Certs
-    [1,2,3,4,5,6,7].forEach(n => {
-      document.querySelector(`#cert-${n} .cert-title`).textContent = document.getElementById(`edit-c${n}-title`).value;
-      document.querySelector(`#cert-${n} .cert-issuer`).textContent = document.getElementById(`edit-c${n}-issuer`).value;
-      document.querySelector(`#cert-${n} .cert-date`).textContent = document.getElementById(`edit-c${n}-date`).value;
-    });
-
-    closeEditModal();
-    // Success flash
-    const fab = document.querySelector('.edit-fab');
-    fab.style.background = '#16a34a';
-    setTimeout(() => fab.style.background = '', 1500);
-  }
-</script>
-</body>
-</html>yId('p1-title').textContent = document.getElementById('edit-p1-title').value;
-    document.getElementById('p1-desc').textContent = document.getElementById('edit-p1-desc').value;
-    setTags(document.getElementById('p1-tags'), document.getElementById('edit-p1-tags').value);
-
-    document.getElementById('p2-title').textContent = document.getElementById('edit-p2-title').value;
-    document.getElementById('p2-desc').textContent = document.getElementById('edit-p2-desc').value;
-    setTags(document.getElementById('p2-tags'), document.getElementById('edit-p2-tags').value);
-
-    document.getElementById('p3-title').textContent = document.getElementById('edit-p3-title').value;
-    document.getElementById('p3-desc').textContent = document.getElementById('edit-p3-desc').value;
-    setTags(document.getElementById('p3-tags'), document.getElementById('edit-p3-tags').value);
-
-    // Certs
-    [1,2,3,4,5,6,7].forEach(n => {
-      document.querySelector(`#cert-${n} .cert-title`).textContent = document.getElementById(`edit-c${n}-title`).value;
-      document.querySelector(`#cert-${n} .cert-issuer`).textContent = document.getElementById(`edit-c${n}-issuer`).value;
-      document.querySelector(`#cert-${n} .cert-date`).textContent = document.getElementById(`edit-c${n}-date`).value;
-    });
-
-    closeEditModal();
-    // Success flash
-    const fab = document.querySelector('.edit-fab');
-    fab.style.background = '#16a34a';
-    setTimeout(() => fab.style.background = '', 1500);
-  }
 </script>
 </body>
 </html>

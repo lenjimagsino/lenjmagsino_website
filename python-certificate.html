@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Python Certification — Lenj Jesther Magsino</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --red: #e8001d;
+      --red-dim: #9b0013;
+      --red-glow: rgba(232,0,29,0.35);
+      --black: #030303;
+      --dark: #0a0a0a;
+      --white: #f0f0f0;
+      --muted: rgba(240,240,240,0.45);
+      --mono: 'Share Tech Mono', monospace;
+      --display: 'Bebas Neue', sans-serif;
+      --body: 'Rajdhani', sans-serif;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--body);
+      overflow-x: hidden;
+      cursor: none;
+    }
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.028;
+      pointer-events: none;
+      z-index: 9990;
+    }
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.04) 2px, rgba(0,0,0,0.04) 4px);
+      pointer-events: none;
+      z-index: 9991;
+    }
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 60px;
+      background: rgba(3,3,3,0.7);
+      backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid rgba(255,255,255,0.09);
+      animation: slideDown 0.8s ease forwards;
+    }
+    @keyframes slideDown { from { transform: translateY(-100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    .nav-logo {
+      font-family: var(--display);
+      font-size: 1.8rem;
+      letter-spacing: 0.08em;
+      color: var(--white);
+    }
+    .nav-logo span { color: var(--red); }
+    .nav-back {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--red); }
+    .container {
+      min-height: 100vh;
+      padding: 120px 60px 60px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .cert-header {
+      margin-bottom: 60px;
+      text-align: center;
+    }
+    .cert-title {
+      font-family: var(--display);
+      font-size: clamp(2.5rem, 5vw, 5rem);
+      letter-spacing: 0.04em;
+      margin-bottom: 16px;
+    }
+    .cert-title span { color: var(--red); }
+    .cert-issuer {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+    .tabs {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 40px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .tab-btn {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 12px 28px;
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid rgba(255,255,255,0.1);
+      cursor: none;
+      transition: all 0.3s;
+    }
+    .tab-btn.active {
+      background: var(--red);
+      color: #fff;
+      border-color: var(--red);
+    }
+    .tab-btn:hover { border-color: var(--red); color: var(--white); }
+    .pdf-viewer {
+      display: none;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 2px;
+      overflow: hidden;
+      backdrop-filter: blur(16px);
+    }
+    .pdf-viewer.active {
+      display: block;
+      animation: fadeIn 0.4s ease;
+    }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .pdf-embed {
+      width: 100%;
+      height: 600px;
+      border: none;
+    }
+    .external-links {
+      display: flex;
+      gap: 16px;
+      margin-top: 40px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .cert-link {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 12px 28px;
+      background: var(--red);
+      color: #fff;
+      border: none;
+      text-decoration: none;
+      cursor: none;
+      transition: all 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .cert-link:hover {
+      background: #ff1a33;
+      box-shadow: 0 0 30px rgba(232,0,29,0.35);
+    }
+    footer {
+      background: #000;
+      border-top: 1px solid rgba(255,255,255,0.09);
+      padding: 40px 60px;
+      text-align: center;
+      margin-top: 100px;
+    }
+    .footer-text {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      color: rgba(240,240,240,0.2);
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">LJM<span>.</span></div>
+  <a href="index.html#certificates" class="nav-back">← Back to Certificates</a>
+</nav>
+
+<div class="container">
+  <div class="cert-header">
+    <h1 class="cert-title">Python <span>Certification</span></h1>
+    <div class="cert-issuer">Certiport</div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="showTab('page1')">Page 1: Certificate</button>
+    <button class="tab-btn" onclick="showTab('page2')">Page 2: Score Report</button>
+  </div>
+
+  <div class="pdf-viewer active" id="page1">
+    <iframe src="certificates/Python-Certificate.pdf" class="pdf-embed"></iframe>
+  </div>
+
+  <div class="pdf-viewer" id="page2">
+    <iframe src="certificates/Python-ScoreReport.pdf" class="pdf-embed"></iframe>
+  </div>
+
+  <div class="external-links">
+    <a href="https://www.certiport.com/portal/Pages/PrintTranscriptInfo.aspx?action=Cert&format=pdf&id=471" class="cert-link" target="_blank">
+      Open in New Tab
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/>
+      </svg>
+    </a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-text">© 2026 Lenj Jesther Magsino. All rights reserved.</div>
+</footer>
+
+<script>
+  function showTab(tabId) {
+    // Hide all viewers
+    document.querySelectorAll('.pdf-viewer').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+    
+    // Show selected viewer and activate button
+    document.getElementById(tabId).classList.add('active');
+    event.target.classList.add('active');
+  }
+</script>
+
+</body>
+</html>
