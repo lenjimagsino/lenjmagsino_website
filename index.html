@@ -508,17 +508,18 @@
   .education-card {
     position: relative;
     cursor: pointer;
+    overflow: hidden;
   }
   .education-tooltip {
     position: absolute;
-    bottom: 130%;
+    top: 20%;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translate(-50%, -50%);
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s;
     z-index: 1000;
-    min-width: 260px;
+    min-width: 240px;
   }
   .education-card:hover .education-tooltip {
     opacity: 1;
@@ -555,17 +556,7 @@
     line-height: 1.5;
   }
   .education-tooltip::after {
-    content: '';
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 10px;
-    height: 10px;
-    background: var(--glass);
-    border-right: 1px solid var(--glass-border);
-    border-bottom: 1px solid var(--glass-border);
-    transform: translateX(-50%) rotate(45deg);
+    display: none;
   }
 
   /* ── PROJECTS ── */
