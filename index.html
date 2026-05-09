@@ -15,10 +15,10 @@
     --red-dim: #e85555;
     --red-glow: rgba(255,107,107,0.3);
     --red-subtle: rgba(255,107,107,0.08);
-    --green: #2ecc71;
-    --green-dim: #27ae60;
-    --green-glow: rgba(46,204,113,0.3);
-    --green-subtle: rgba(46,204,113,0.08);
+    --accent: #ff6b6b;
+    --accent-dim: #e85555;
+    --accent-glow: rgba(255,107,107,0.3);
+    --accent-subtle: rgba(255,107,107,0.08);
     --black: #0f1419;
     --dark: #1a1f2e;
     --glass: rgba(255,255,255,0.05);
@@ -29,6 +29,49 @@
     --mono: 'Share Tech Mono', monospace;
     --display: 'Bebas Neue', sans-serif;
     --body: 'Rajdhani', sans-serif;
+  }
+
+  /* ── LIGHT MODE ── */
+  [data-theme="light"] {
+    --red: #ff3333;
+    --red-dim: #cc2a2a;
+    --red-glow: rgba(255,51,51,0.3);
+    --red-subtle: rgba(255,51,51,0.08);
+    --accent: #ff3333;
+    --accent-dim: #cc2a2a;
+    --accent-glow: rgba(255,51,51,0.3);
+    --accent-subtle: rgba(255,51,51,0.08);
+    --black: #ffffff;
+    --dark: #f8f8f8;
+    --glass: rgba(0,0,0,0.05);
+    --glass-border: rgba(0,0,0,0.1);
+    --glass-border-red: rgba(255,51,51,0.3);
+    --white: #1a1a1a;
+    --muted: rgba(26,26,26,0.65);
+  }
+
+  [data-theme="light"] body {
+    background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 50%, #f8f8f8 100%);
+  }
+
+  [data-theme="light"] #about {
+    background: linear-gradient(135deg, #f8f8f8 0%, rgba(255,51,51,0.03) 100%);
+  }
+
+  [data-theme="light"] #projects {
+    background: linear-gradient(135deg, #f8f8f8 0%, rgba(255,51,51,0.02) 100%);
+  }
+
+  [data-theme="light"] #experience {
+    background: linear-gradient(135deg, rgba(255,51,51,0.02) 0%, #f8f8f8 100%);
+  }
+
+  [data-theme="light"] #education {
+    background: linear-gradient(135deg, rgba(255,51,51,0.03) 0%, #f8f8f8 100%);
+  }
+
+  [data-theme="light"] nav {
+    background: rgba(255,255,255,0.95);
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -46,8 +89,8 @@
   body::before {
     content: '';
     position: fixed; inset: 0;
-    background: radial-gradient(ellipse at 80% 50%, rgba(46,204,113,0.08) 0%, transparent 50%),
-                radial-gradient(ellipse at 20% 80%, rgba(255,107,107,0.05) 0%, transparent 60%);
+    background: radial-gradient(ellipse at 80% 50%, rgba(255,107,107,0.05) 0%, transparent 50%),
+                radial-gradient(ellipse at 20% 80%, rgba(255,107,107,0.04) 0%, transparent 60%);
     pointer-events: none;
     z-index: 9990;
   }
@@ -56,7 +99,7 @@
   body::after {
     content: '';
     position: fixed; inset: 0;
-    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(46,204,113,0.015) 2px, rgba(46,204,113,0.015) 4px);
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,107,107,0.01) 2px, rgba(255,107,107,0.01) 4px);
     pointer-events: none;
     z-index: 9991;
   }
@@ -390,11 +433,11 @@
   .stat-num {
     font-family: var(--display);
     font-size: 3.5rem;
-    color: var(--green);
+    color: var(--accent);
     line-height: 1;
   }
   .stat-card:nth-child(odd) .stat-num { color: var(--red); }
-  .stat-card:nth-child(even) .stat-num { color: var(--green); }
+  .stat-card:nth-child(even) .stat-num { color: var(--accent); }
   .stat-label {
     font-family: var(--mono);
     font-size: 0.68rem;
@@ -426,7 +469,7 @@
     margin-bottom: 20px;
     color: var(--red);
   }
-  .skill-category:nth-child(2n) .skill-cat-title { color: var(--green); }
+  .skill-category:nth-child(2n) .skill-cat-title { color: var(--accent); }
   .skill-list { list-style: none; }
   .skill-item {
     display: flex; align-items: center; gap: 12px;
@@ -822,7 +865,7 @@
     content: '';
     position: absolute; left: 0; top: 0; bottom: 0;
     width: 2px;
-    background: linear-gradient(to bottom, transparent, var(--green-dim) 20%, var(--red-dim) 50%, var(--green-dim) 80%, transparent);
+    background: linear-gradient(to bottom, transparent, var(--red) 20%, var(--accent-dim) 50%, var(--red) 80%, transparent);
   }
   .timeline-item {
     position: relative;
@@ -836,10 +879,10 @@
     content: '';
     position: absolute; left: -46px; top: 38px;
     width: 10px; height: 10px;
-    background: var(--green);
+    background: var(--accent);
     border: 2px solid var(--black);
     border-radius: 50%;
-    box-shadow: 0 0 12px var(--green-glow);
+    box-shadow: 0 0 12px var(--accent-glow);
   }
   .timeline-item:nth-child(odd)::before {
     background: var(--red);
@@ -966,7 +1009,7 @@
     text-transform: uppercase;
     transition: color 0.2s;
   }
-  .footer-links a:hover { color: var(--green); }
+  .footer-links a:hover { color: var(--accent); }
   .footer-copy {
     font-family: var(--mono);
     font-size: 0.62rem;
@@ -1008,6 +1051,29 @@
     .hero-cta { flex-direction: column; }
     .nav-links { display: none; }
   }
+
+  /* ── THEME TOGGLE ── */
+  .theme-toggle {
+    background: transparent;
+    border: 1px solid var(--glass-border);
+    color: var(--muted);
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .theme-toggle:hover {
+    color: var(--white);
+    border-color: var(--red);
+    box-shadow: 0 0 15px rgba(255,107,107,0.2);
+  }
 </style>
 </head>
 <body>
@@ -1026,6 +1092,10 @@
     <li><a href="#certificates">Certificates</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
+  <button class="theme-toggle" id="theme-toggle">
+    <span id="theme-icon">🌙</span>
+    <span id="theme-label">Dark</span>
+  </button>
 </nav>
 
 <!-- HERO -->
@@ -1753,6 +1823,36 @@
     });
   });
 
+  /* ── THEME TOGGLE ── */
+  const themeToggle = document.getElementById('theme-toggle');
+  const themeIcon = document.getElementById('theme-icon');
+  const themeLabel = document.getElementById('theme-label');
+  const html = document.documentElement;
+  
+  // Load saved theme or default to dark
+  const savedTheme = localStorage.getItem('theme') || 'dark';
+  html.setAttribute('data-theme', savedTheme);
+  updateThemeDisplay(savedTheme);
+  
+  function updateThemeDisplay(theme) {
+    if (theme === 'light') {
+      themeIcon.textContent = '☀️';
+      themeLabel.textContent = 'Light';
+    } else {
+      themeIcon.textContent = '🌙';
+      themeLabel.textContent = 'Dark';
+    }
+  }
+  
+  themeToggle.addEventListener('click', () => {
+    const currentTheme = html.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    
+    html.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    updateThemeDisplay(newTheme);
+  });
+
   /* ── ROLE CAROUSEL ANIMATION ── */
   const roles = ['Software Engineer', 'Full Stack Developer', 'UI/UX Designer', 'Problem Solver', 'Tech Enthusiast'];
   let roleIndex = 0;
@@ -1787,8 +1887,8 @@
   const columns = Math.floor(canvas.width / fontSize);
   const drops = Array(columns).fill(0);
   
-  // Colors: red and green
-  const colors = ['#ff6b6b', '#2ecc71'];
+  // Colors: red shades only
+  const colors = ['#ff6b6b', '#ff4444'];
   
   let lastTime = 0;
   
@@ -1813,7 +1913,7 @@
       // Random binary digit (0 or 1)
       const text = Math.random() > 0.5 ? '1' : '0';
       
-      // Random color (red or green)
+      // Random color (red shades)
       const color = colors[Math.floor(Math.random() * colors.length)];
       ctx.fillStyle = color;
       
